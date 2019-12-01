@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Favideo - 1</title>
+    <link id="favicon" rel="icon" type="image/png" sizes="48x48">
+    <style>
+        .blocks div {
+            width: 36px;
+            height: 36px;
+            background: black;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<video width="400" controls>
+    <source src="public/video/landscape.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+</video>
+<div class="blocks">
+    <div id="b1"></div>
+    <div id="b2"></div>
+    <div id="b3"></div>
+    <div id="b4"></div>
+</div>
+<img id="output" />
+
+<script>
+    var favicon = document.getElementById('favicon');
+    var video = document.querySelector('video');
+    var canvas = document.createElement("canvas");
+    var canvasCtx = canvas.getContext('2d');
+    var canvasWidth = 0, canvasHeight = 0;
+    var faviconLength = 48;
+    var videoInCanvasSettings = {
+        width: 0, height: 0, offset: 0
+    };
+    var respectAspectRatio = false;
+
+    var getAverageColor = function(canvas) {
+        var ctx = canvas.getContext('2d');
+        var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        var totalRgba = {
+            r: 0, g: 0, b: 0, a: 0
+        };
+        var nbOfPixels = imageData.length/4;
+        for (var i = 0; i < imageData.length; i += 4) {
+            totalRgba.r = totalRgba.r + imageData[i];
+            totalRgba.g = totalRgba.g + imageData[i+1];
+            totalRgba.b = totalRgba.b + imageData[i+2];
+            totalRgba.a = totalRgba.a + imageData[i+3];
+        }
+        var avgRgba = {
+            r: totalRgba.r/nbOfPixels,
+            g: totalRgba.g/nbOfPixels,
+            b: totalRgba.b/nbOfPixels,
+            a: totalRgba.a/nbOfPixels
+        };
+        return avgRgba;
+    };
+
+    var getRgbaCssString = function(rgba) {
+        return 'rgba('+rgba.r+","+rgba.g+","+rgba.b+","+rgba.a+")";
+    };
+
+    // var colors = [];
+
+    var getImg = function() {
+        if (respectAspectRatio) {
+            canvasCtx.drawImage(video, videoInCanvasSettings.dx, videoInCanvasSettings.dy, videoInCanvasSettings.dWidth, videoInCanvasSettings.dHeight);
+        } else {
+            canvasCtx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        }
+        // var avgColor = getAverageColor(canvas);
+        // document.getElementById('b1').style.background = getRgbaCssString(avgColor);
+        // document.getElementById('output').src = canvas.toDataURL();
+        return canvas.toDataURL();
+    };
+
+    var updateFavicon = function(url) {
+        favicon.href = url;
+    };
+
+    // this event handler captures the current frame as an image,
+    // and sets it to the favicon.
+    var timeupdateHandler = function() {
+        var currentFrameUrl = getImg();
+        updateFavicon(currentFrameUrl);
+    };
+
+    var getVideoInCanvasFit = function(v_w, v_h, c_w) {
+        var x = v_w/c_w;
+        var av_w = c_w;
+        var av_h = v_h/x;
+        var o_t = (c_w-av_h)/2;
+        return {
+            width: av_w,
+            height: av_h,
+            offset: o_t
+        }
+    };
+
+    var calculateAndSetVideoInCanvasProfile = function(video, canvasWidth) {
+        var v_w = video.videoWidth, v_h = video.videoHeight;
+        var newSize;
+        if (v_w > v_h) {
+            newSize = getVideoInCanvasFit(v_w, v_h, canvasWidth);
+            videoInCanvasSettings.dx = 0;
+            videoInCanvasSettings.dy = newSize.offset;
+            videoInCanvasSettings.dWidth = newSize.width;
+            videoInCanvasSettings.dHeight = newSize.height;
+        } else {
+            newSize = getVideoInCanvasFit(v_h, v_w, canvasWidth);
+            videoInCanvasSettings.dx =  newSize.offset;
+            videoInCanvasSettings.dy = 0;
+            videoInCanvasSettings.dWidth = newSize.height;
+            videoInCanvasSettings.dHeight = newSize.width;
+        }
+    };
+
+    // this event handler updates the canvas width and height,
+    // because the video width and height are now known.
+    var loadedmetadataHandler = function() {
+        if (respectAspectRatio) {
+            calculateAndSetVideoInCanvasProfile(video, faviconLength);
+            canvasHeight = faviconLength;
+            canvasWidth = faviconLength;
+        } else {
+            canvasWidth = video.videoWidth;
+            canvasHeight = video.videoHeight;
+        }
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+    };
+
+    /**
+     * This function connects a HTML5 video element with the favicon.
+     *
+     * @param video: the related video element
+     * @param respectAspectRatio_: set to `false` if you want a squared video, or to `true` if you want to maintain the
+     * aspect ratio
+     * @param fps: the fps frequency at which the video is drawn to the the favicon. Setting to `false` will let the
+     * video be drawn every `timeupdate` event of the video.
+     */
+    var connectVideoToFavicon = function(video, respectAspectRatio_, fps) {
+        respectAspectRatio = respectAspectRatio_;
+        video.addEventListener('loadedmetadata', loadedmetadataHandler);
+        if (!fps) {
+            video.addEventListener('timeupdate', timeupdateHandler);
+        } else {
+            setInterval(timeupdateHandler, 1000/fps);
+        }
+    };
+
+    connectVideoToFavicon(video, true, false);
+
+
+</script>
+</body>
+</html>
