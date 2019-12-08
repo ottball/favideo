@@ -2,10 +2,9 @@ import {FavideoMode} from "./FavideoMode";
 import {Color} from "./Color";
 
 export class FavideoModePlayIcon extends FavideoMode {
-    constructor(fps, model, colorType) {
+    constructor(fps, colorType) {
         super();
         this.fps = fps;
-        this.model = model;
         this.colorType = colorType;
     }
 
@@ -47,19 +46,8 @@ export class FavideoModePlayIcon extends FavideoMode {
         }
     }
 
-    getAverageColor() {
-        return Color.getRgbaCssString(Color.getAverageColorFromCanvas(canvas));
-    }
-
-    getDominantColor() {
-        // const colorThief = new ColorThief();
-        // colorThief.getColor(sourceImage);
-    }
-
     drawObject(color, canvasCtx, faviconSize) {
-        if (this.model == "play-pause") {
-            this.drawPlayObject(color, canvasCtx, faviconSize);
-        }
+        this.drawPlayObject(color, canvasCtx, faviconSize);
     }
 
     drawPlayObject(color, canvasCtx, faviconSize) {

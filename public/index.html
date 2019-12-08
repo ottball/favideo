@@ -16,7 +16,8 @@
     let video = document.querySelector('video');
     // mode: frame, [color, shape], play/pause
     // let mode = new FavideoModeVideo(true, false);
-    let mode = new FavideoModeColorObject(false, "play-pause", "dominant");
+    // let mode = new FavideoModeColorObject(false, "dominant");
+    let mode = new RecolorMode(false, "dominant");
     let favideo = new Favideo(video, mode, 48);
 </script>
 </body>
