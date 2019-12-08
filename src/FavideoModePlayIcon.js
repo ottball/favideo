@@ -1,7 +1,7 @@
 import {FavideoMode} from "./FavideoMode";
 import {Color} from "./Color";
 
-export class FavideoModeColorObject extends FavideoMode {
+export class FavideoModePlayIcon extends FavideoMode {
     constructor(fps, model, colorType) {
         super();
         this.fps = fps;
@@ -82,11 +82,17 @@ export class FavideoModeColorObject extends FavideoMode {
         this.faviconCanvas.height = canvasHeight;
     };
 
+    restoreOriginalFavicon() {
+        this.favicon.restoreDefault();
+    }
+
     /**
      * This function registers the update event of FavideoModeVideo.
      */
     registerUpdateEvent(favideo) {
         favideo.registerVideoEvent('loadedmetadata', this.loadedmetadataHandler.bind(favideo));
+        favideo.registerVideoEvent('pause', this.restoreOriginalFavicon.bind(favideo));
+        favideo.registerVideoEvent('ended', this.restoreOriginalFavicon.bind(favideo));
         if (!this.fps) {
             favideo.registerVideoEvent('timeupdate', favideo.update.bind(favideo))
         } else {

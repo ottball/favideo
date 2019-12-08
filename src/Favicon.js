@@ -4,6 +4,7 @@ export class Favicon {
         if (!existingFavicon) {
             this.node = this.create();
         } else {
+            this.originalHref = existingFavicon.href;
             this.node = existingFavicon;
         }
     }
@@ -21,6 +22,12 @@ export class Favicon {
     update(url) {
         this.href = url;
     };
+
+    restoreDefault() {
+        if (this.originalHref) {
+            this.update(this.originalHref);
+        }
+    }
 
     set href(url) {
         this.node.href = url;
