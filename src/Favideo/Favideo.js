@@ -2,8 +2,8 @@ import {Favicon} from "../Util/Favicon";
 import {Canvas} from "../Util/Canvas";
 
 export class Favideo {
-    constructor(video, mode, faviconSize) {
-        this.video = video;
+    constructor(input, mode, faviconSize) {
+        this.input = input;
         this.mode = mode;
         this.favicon = new Favicon();
         this.favicon.size = faviconSize;
@@ -16,7 +16,7 @@ export class Favideo {
      * This function fetches and sets the frame for the configured FavideoMode.
      */
     update() {
-        let frameUrl = this.mode.getFaviconFrame(this.video, this.faviconCanvas.node, this.faviconCanvas.ctx, this.favicon);
+        let frameUrl = this.mode.getFaviconFrame(this.input, this.faviconCanvas.node, this.faviconCanvas.ctx, this.favicon);
         if (frameUrl) {
             this.favicon.update(frameUrl);
         }
@@ -44,7 +44,7 @@ export class Favideo {
      */
     registerVideoEvent(event, func) {
         this.videoEventListeners.push({event: event, func: func});
-        this.video.addEventListener(event, func);
+        this.input.video.addEventListener(event, func);
     }
 
     /**
@@ -53,7 +53,7 @@ export class Favideo {
     unregisterVideoEvents() {
         for (let i = 0; i < this.videoEventListeners.length; i++) {
             let vel = this.videoEventListeners[i];
-            this.video.removeEventListener(vel.event, vel.func);
+            this.input.video.removeEventListener(vel.event, vel.func);
         }
     }
 }

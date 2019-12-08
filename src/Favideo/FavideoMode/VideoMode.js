@@ -17,11 +17,11 @@ export class VideoMode extends FavideoMode {
      * @param canvasCtx
      * @returns {string}
      */
-    getFaviconFrame(video, canvas, canvasCtx) {
+    getFaviconFrame(input, canvas, canvasCtx) {
         if (this.respectAspectRatio) {
-            canvasCtx.drawImage(video, this.videoInCanvasSettings.dx, this.videoInCanvasSettings.dy, this.videoInCanvasSettings.dWidth, this.videoInCanvasSettings.dHeight);
+            canvasCtx.drawImage(input.getSource(), this.videoInCanvasSettings.dx, this.videoInCanvasSettings.dy, this.videoInCanvasSettings.dWidth, this.videoInCanvasSettings.dHeight);
         } else {
-            canvasCtx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvasCtx.drawImage(input.getSource(), 0, 0, canvas.width, canvas.height);
         }
         return canvas.toDataURL();
     };
@@ -77,12 +77,12 @@ export class VideoMode extends FavideoMode {
     loadedmetadataHandler() {
         let canvasWidth = 0, canvasHeight = 0;
         if (this.mode.respectAspectRatio) {
-            this.mode.calculateAndSetVideoInCanvasProfile(this.video, this.favicon.size);
+            this.mode.calculateAndSetVideoInCanvasProfile(this.input.video, this.favicon.size);
             canvasWidth = this.favicon.size;
             canvasHeight = this.favicon.size;
         } else {
-            canvasWidth = this.video.videoWidth;
-            canvasHeight = this.video.videoHeight;
+            canvasWidth = this.input.video.videoWidth;
+            canvasHeight = this.input.video.videoHeight;
         }
         this.faviconCanvas.width = canvasWidth;
         this.faviconCanvas.height = canvasHeight;

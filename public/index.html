@@ -14,10 +14,11 @@
 </video>
 <script>
     let video = document.querySelector('video');
+    let input = new VideoInput(video);
     // let mode = new VideoMode(true, false);
-    let mode = new PlayIconMode(false, "average");
-    // let mode = new RecolorMode(false, "dominant");
-    let favideo = new Favideo(video, mode, 48);
+    // let mode = new PlayIconMode(false, "average");
+    let mode = new RecolorMode(false, "average");
+    let favideo = new Favideo(input, mode, 48);
 </script>
 </body>
 </html>

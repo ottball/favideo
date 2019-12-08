@@ -34,17 +34,17 @@ export class RecolorMode extends FavideoMode {
      * @param canvasCtx
      * @returns {string}
      */
-    getFaviconFrame(video, canvas, canvasCtx, favicon) {
+    getFaviconFrame(input, canvas, canvasCtx, favicon) {
         if (!this.faviconCanvasCtx) {
             this.setFavicon(favicon);
         }
 
         // draw video frame on to original size faviconCanvas
         let canvas2 = document.createElement('canvas');
-        canvas2.width = video.videoWidth;
-        canvas2.height = video.videoHeight;
+        canvas2.width = input.video.videoWidth;
+        canvas2.height = input.video.videoHeight;
         let canvasCtx2 = canvas2.getContext('2d');
-        canvasCtx2.drawImage(video, 0, 0, canvas2.width, canvas2.height);
+        canvasCtx2.drawImage(input.getSource(), 0, 0, canvas2.width, canvas2.height);
         let pixelColor = this.getColor(canvas2, canvasCtx2);
 
         if (!this.faviconCanvasCtx) {
