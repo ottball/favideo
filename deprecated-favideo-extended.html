@@ -72,9 +72,9 @@
         } else {
             canvasCtx.drawImage(video, 0, 0, canvas.width, canvas.height);
         }
-        // var avgColor = getAverageColor(canvas);
+        // var avgColor = getAverageColor(faviconCanvas);
         // document.getElementById('b1').style.background = getRgbaCssString(avgColor);
-        // document.getElementById('output').src = canvas.toDataURL();
+        // document.getElementById('output').src = faviconCanvas.toDataURL();
         return canvas.toDataURL();
     };
 
@@ -119,7 +119,7 @@
         }
     };
 
-    // this event handler updates the canvas width and height,
+    // this event handler updates the faviconCanvas width and height,
     // because the video width and height are now known.
     var loadedmetadataHandler = function() {
         if (respectAspectRatio) {

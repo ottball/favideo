@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <title>Favideo - Demo Page</title>
     <link id="favicon" rel="icon" type="image/png" sizes="48x48">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
     <script src="dist/favicon.js"></script>
 </head>
 <body>
 <video width="400" controls>
-    <source src="public/video/landscape.mp4" type="video/mp4">
+    <source src="video/landscape.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
 </video>
 <script>
     let video = document.querySelector('video');
     // mode: frame, [color, shape], play/pause
     let mode = new FavideoModeVideo(true, false);
+    // let mode = new FavideoModeColorObject(false, "play-pause", "dominant");
     let favideo = new Favideo(video, mode, 48);
 </script>
 </body>

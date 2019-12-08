@@ -7,7 +7,7 @@ export class Favideo {
         this.mode = mode;
         this.favicon = new Favicon();
         this.favicon.size = faviconSize;
-        this.canvas = new Canvas();
+        this.faviconCanvas = new Canvas();
         this.videoEventListeners = [];
         this.enable();
     }
@@ -16,7 +16,7 @@ export class Favideo {
      * This function fetches and sets the frame for the configured FavideoMode.
      */
     update() {
-        let frameUrl = this.mode.getFaviconFrame(this.video, this.canvas.node, this.canvas.ctx);
+        let frameUrl = this.mode.getFaviconFrame(this.video, this.faviconCanvas.node, this.faviconCanvas.ctx, this.favicon);
         this.favicon.update(frameUrl);
     };
 

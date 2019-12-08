@@ -71,7 +71,7 @@ export class FavideoModeVideo extends FavideoMode {
     };
 
     /**
-     * This event handler updates the canvas width and height,
+     * This event handler updates the faviconCanvas width and height,
      * because the video width and height are now known.
      */
     loadedmetadataHandler() {
@@ -84,8 +84,8 @@ export class FavideoModeVideo extends FavideoMode {
             canvasWidth = this.video.videoWidth;
             canvasHeight = this.video.videoHeight;
         }
-        this.canvas.width = canvasWidth;
-        this.canvas.height = canvasHeight;
+        this.faviconCanvas.width = canvasWidth;
+        this.faviconCanvas.height = canvasHeight;
     };
 
     /**

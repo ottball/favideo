@@ -74,7 +74,7 @@ const calculateAndSetVideoInCanvasProfile = function(video, faviconLength) {
 };
 
 /**
- * This event handler updates the canvas width and height,
+ * This event handler updates the faviconCanvas width and height,
  * because the video width and height are now known.
  */
 const loadedmetadataHandler = function() {
