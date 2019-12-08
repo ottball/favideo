@@ -1,5 +1,5 @@
 import {FavideoMode} from "./FavideoMode";
-import {Color} from "../Util/Color";
+import {Color} from "../../Util/Color";
 
 export class PlayIconMode extends FavideoMode {
     constructor(fps, colorType) {

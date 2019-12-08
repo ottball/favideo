@@ -1,5 +1,5 @@
-import {Favicon} from "./Util/Favicon";
-import {Canvas} from "./Util/Canvas";
+import {Favicon} from "../Util/Favicon";
+import {Canvas} from "../Util/Canvas";
 
 export class Favideo {
     constructor(video, mode, faviconSize) {

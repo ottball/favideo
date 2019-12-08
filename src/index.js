@@ -1,7 +1,7 @@
-import {Favideo} from './Favideo';
-import {VideoMode} from "./FavideoMode/VideoMode";
-import {PlayIconMode} from "./FavideoMode/PlayIconMode";
-import {RecolorMode} from "./FavideoMode/RecolorMode";
+import {Favideo} from './Favideo/Favideo';
+import {VideoMode} from "./Favideo/FavideoMode/VideoMode";
+import {PlayIconMode} from "./Favideo/FavideoMode/PlayIconMode";
+import {RecolorMode} from "./Favideo/FavideoMode/RecolorMode";
 
 window.Favideo = Favideo;
 window.VideoMode = VideoMode;
