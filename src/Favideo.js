@@ -17,7 +17,9 @@ export class Favideo {
      */
     update() {
         let frameUrl = this.mode.getFaviconFrame(this.video, this.faviconCanvas.node, this.faviconCanvas.ctx, this.favicon);
-        this.favicon.update(frameUrl);
+        if (frameUrl) {
+            this.favicon.update(frameUrl);
+        }
     };
 
     /**
