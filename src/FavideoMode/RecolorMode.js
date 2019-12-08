@@ -1,5 +1,5 @@
 import {FavideoMode} from "./FavideoMode";
-import {Color} from "./Color";
+import {Color} from "../Util/Color";
 
 export class RecolorMode extends FavideoMode {
     constructor(fps, colorType) {

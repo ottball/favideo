@@ -19,7 +19,7 @@ export class Color {
             b: totalRgba.b/nbOfPixels,
             a: totalRgba.a/nbOfPixels
         };
-        return avgRgba;
+        return Color.getRgbaCssString(avgRgba);
     };
 
     static createPixelArray(imgData, pixelCount) {

@@ -1,9 +1,9 @@
 import {Favideo} from './Favideo';
-import {FavideoModeVideo} from "./FavideoModeVideo";
-import {FavideoModePlayIcon} from "./FavideoModePlayIcon";
-import {RecolorMode} from "./RecolorMode";
+import {VideoMode} from "./FavideoMode/VideoMode";
+import {PlayIconMode} from "./FavideoMode/PlayIconMode";
+import {RecolorMode} from "./FavideoMode/RecolorMode";
 
 window.Favideo = Favideo;
-window.FavideoModeVideo = FavideoModeVideo;
-window.FavideoModeColorObject = FavideoModePlayIcon;
+window.VideoMode = VideoMode;
+window.PlayIconMode = PlayIconMode;
 window.RecolorMode = RecolorMode;

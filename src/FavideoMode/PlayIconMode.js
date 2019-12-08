@@ -1,7 +1,7 @@
 import {FavideoMode} from "./FavideoMode";
-import {Color} from "./Color";
+import {Color} from "../Util/Color";
 
-export class FavideoModePlayIcon extends FavideoMode {
+export class PlayIconMode extends FavideoMode {
     constructor(fps, colorType) {
         super();
         this.fps = fps;

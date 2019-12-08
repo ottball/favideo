@@ -1,6 +1,6 @@
 import {FavideoMode} from "./FavideoMode";
 
-export class FavideoModeVideo extends FavideoMode {
+export class VideoMode extends FavideoMode {
     constructor(respectAspectRatio, fps) {
         super();
         this.respectAspectRatio = respectAspectRatio;
@@ -11,7 +11,7 @@ export class FavideoModeVideo extends FavideoMode {
     }
 
     /**
-     * This function returns the to be rendered frame for FavideoModeVideo.
+     * This function returns the to be rendered frame for VideoMode.
      * @param video
      * @param canvas
      * @param canvasCtx
@@ -89,7 +89,7 @@ export class FavideoModeVideo extends FavideoMode {
     };
 
     /**
-     * This function registers the update event of FavideoModeVideo.
+     * This function registers the update event of VideoMode.
      */
     registerUpdateEvent(favideo) {
         favideo.registerVideoEvent('loadedmetadata', this.loadedmetadataHandler.bind(favideo));
