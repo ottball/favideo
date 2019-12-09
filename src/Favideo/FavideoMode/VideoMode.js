@@ -1,10 +1,9 @@
 import {FavideoMode} from "./FavideoMode";
 
 export class VideoMode extends FavideoMode {
-    constructor(respectAspectRatio, fps) {
-        super();
+    constructor(fps, respectAspectRatio) {
+        super(fps);
         this.respectAspectRatio = respectAspectRatio;
-        this.fps = fps;
         this.videoInCanvasSettings = {
             dx: 0, dy: 0, dWidth: 0, dHeight: 0
         }
@@ -88,19 +87,4 @@ export class VideoMode extends FavideoMode {
         this.faviconCanvas.height = canvasHeight;
     };
 
-    /**
-     * This function registers the update event of VideoMode.
-     */
-    registerUpdateEvent(favideo) {
-        favideo.registerVideoEvent('loadedmetadata', this.loadedmetadataHandler.bind(favideo));
-        if (!this.fps) {
-            favideo.registerVideoEvent('timeupdate', favideo.update.bind(favideo))
-        } else {
-            this.interval = setInterval(favideo.update.bind(favideo), 1000/this.fps);
-        }
-    }
-
-    disable() {
-        clearTimeout(this.interval);
-    }
 }
